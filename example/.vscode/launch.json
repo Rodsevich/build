@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Dart",
+            "program": "bin/main.dart",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Builders recreacion",
+            "type": "dart",
+            "request": "launch",
+            "program": ".dart_tool/pub/bin/build_runner/build_runner.dart.snapshot.dart2",
+            "args": [
+                "build",
+                "--verbose",
+                "--delete-conflicting-outputs"
+            ]
+        },
+        {
+            "name": "Build: debugear sin recreacion",
+            "type": "dart",
+            "request": "launch",
+            "program": ".dart_tool/build/entrypoint/build.dart",
+            "args": [
+                "build",
+                "--verbose",
+                "--delete-conflicting-outputs"
+            ]
+        },
+    ]
+}

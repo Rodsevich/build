@@ -1,27 +1,48 @@
-# Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
+# # Read about `build.yaml` at https://pub.dartlang.org/packages/build_config
+# builders:
+
+#   copyBuilder:
+#     import: "package:example/builder.dart"
+#     builder_factories: ["copyBuilder"]
+#     build_extensions: {".txt": [".txt.copy"]}
+#     build_to: source
+#     auto_apply: root_package
+
+#   resolvingBuilder:
+#     import: "package:example/builder.dart"
+#     builder_factories: ["resolvingBuilder"]
+#     build_extensions: {".dart": [".dart.info.json"]}
+#     build_to: source
+#     auto_apply: root_package
+#     defaults:
+#       generate_for:
+#         # Only apply to .dart files in the web directory
+#         include:
+#         - web/**
+
+#   cssBuilder:
+#     import: "package:example/builder.dart"
+#     builder_factories: ["cssBuilder"]
+#     build_extensions: {"$web$": ["generated.css"]}
+#     auto_apply: root_package
+
+targets:
+  $default:
+    builders:
+      example|aggregator:
+        enabled: true
+      example|analyzer:
+        enabled: true
+
 builders:
-
-  copyBuilder:
+  aggregator:
     import: "package:example/builder.dart"
-    builder_factories: ["copyBuilder"]
-    build_extensions: {".txt": [".txt.copy"]}
+    builder_factories: ["aggregator"]
+    build_extensions: {"lib/$lib$": ["lib/foo/bar/generated.dart"]}
     build_to: source
-    auto_apply: root_package
-
-  resolvingBuilder:
+    runs_before: [example|analyzer]
+  analyzer:
     import: "package:example/builder.dart"
-    builder_factories: ["resolvingBuilder"]
-    build_extensions: {".dart": [".dart.info.json"]}
-    build_to: source
-    auto_apply: root_package
-    defaults:
-      generate_for:
-        # Only apply to .dart files in the web directory
-        include:
-        - web/**
-
-  cssBuilder:
-    import: "package:example/builder.dart"
-    builder_factories: ["cssBuilder"]
-    build_extensions: {"$web$": ["generated.css"]}
-    auto_apply: root_package
+    builder_factories: ["analyzer"]
+    build_extensions: {".dart": [".dart.info"]}
+    build_to: cache
